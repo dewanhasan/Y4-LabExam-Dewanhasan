@@ -9,9 +9,11 @@ import java.util.List;
 @RequestMapping("student")
 public class StudentController {
 
+    private EnrolmentClient enrolmentClient;
     private StudentService studentService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(EnrolmentClient enrolmentClient, StudentService studentService) {
+        this.enrolmentClient = enrolmentClient;
         this.studentService = studentService;
     }
 
@@ -25,4 +27,10 @@ public class StudentController {
         studentService.addStudent(student);
         return student;
     }
+
+    @PostMapping("/student-enrolment")
+    public String studentEnrolment(@RequestBody Student student){
+        String student = enrolmentClient.studentDetails();
+    }
+
 }
